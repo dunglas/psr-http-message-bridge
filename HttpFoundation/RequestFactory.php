@@ -1,24 +1,34 @@
 <?php
 
-namespace Symfony\Bridge\PsrHttpMessage\Factory;
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Symfony\Bridge\PsrHttpMessage\HttpFoundation;
 
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
- * {@inheritdoc}
+ * Creates Symfony Request and UploadedFile instances from PSR-7 ServerRequest and UploadedFile.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class HttpFoundationFactory implements HttpFoundationFactoryInterface
+class RequestFactory
 {
     /**
-     * {@inheritdoc}
+     * Creates a Symfony Request instance from a PSR-7 one.
+     *
+     * @param ServerRequestInterface $psrRequest
+     *
+     * @return Request
      */
     public function createRequest(ServerRequestInterface $psrRequest)
     {
@@ -59,7 +69,11 @@ class HttpFoundationFactory implements HttpFoundationFactoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Creates Symfony UploadedFile instance from PSR-7 ones.
+     *
+     * @param UploadedFileInterface $psrUploadedFile
+     *
+     * @return UploadedFile
      */
     public function createUploadedFile(UploadedFileInterface $psrUploadedFile)
     {
@@ -86,15 +100,5 @@ class HttpFoundationFactory implements HttpFoundationFactoryInterface
     protected function getTemporaryPath()
     {
         return tempnam(sys_get_temp_dir(), uniqid('symfony', true));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createResponse(ResponseInterface $psrResponse)
-    {
-        return new Response(
-
-        );
     }
 }

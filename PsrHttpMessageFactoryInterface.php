@@ -16,30 +16,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 interface PsrHttpMessageFactoryInterface
 {
-    /**
-     * Creates a PSR-7 Request instance from a Symfony one.
-     *
-     * @param Request $symfonyRequest
-     *
-     * @return ServerRequestInterface
-     */
+
     public function createRequest(Request $symfonyRequest);
 
-    /**
-     * Creates a PSR-7 UploadedFile instance from a Symfony one.
-     *
-     * @param UploadedFile $symfonyUploadedFile
-     *
-     * @return UploadedFileInterface
-     */
+
     public function createUploadedFile(UploadedFile $symfonyUploadedFile);
 
-    /**
-     * Creates a PSR-7 Response instance from a Symfony one.
-     *
-     * @param Response $symfonyResponse
-     *
-     * @return ResponseInterface
-     */
+
     public function createResponse(Response $symfonyResponse);
 }
